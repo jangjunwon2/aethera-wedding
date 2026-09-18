@@ -1,22 +1,17 @@
 {
   "version": 2,
-  "functions": {
-    "server.js": {
-      "includeFiles": "admin.html,b2b.html,index.html"
-    }
-  },
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/server.js"
+      "destination": "/api/index.js"
     },
     {
       "source": "/admin",
-      "destination": "/server.js"
+      "destination": "/api/index.js"
     },
     {
       "source": "/b2b",
-      "destination": "/server.js"
+      "destination": "/api/index.js"
     }
   ]
 }
