@@ -178,31 +178,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.x = x;
                 this.y = y;
                 this.isAmbient = isAmbient;
-                this.size = Math.random() * (isAmbient ? 2 : 3.5) + 1;
-                this.speedX = Math.random() * 1.5 - 0.75;
-                this.speedY = isAmbient ? (Math.random() * -0.5 - 0.2) : (Math.random() * 2 - 1);
+                this.size = Math.random() * (isAmbient ? 3 : 5) + 1.5;
+                this.speedX = Math.random() * 1.2 - 0.6;
+                this.speedY = isAmbient ? (Math.random() * -0.6 - 0.3) : (Math.random() * 2 - 1);
                 
-                const hue = 220;
-                const lightness = Math.floor(Math.random() * 20 + 40); // 40%-60% for crisp visibility on light bg
-                this.color = `hsla(${hue}, 10%, ${lightness}%, `;
+                // Warm Rose-Gold, Silk Pearl & Romantic Petal Tones
+                const hue = isAmbient ? (Math.random() > 0.5 ? 25 : 18) : (Math.random() > 0.4 ? 30 : 15);
+                const lightness = Math.floor(Math.random() * 25 + 55);
+                this.color = `hsla(${hue}, 70%, ${lightness}%, `;
                 this.alpha = 0.85;
-                this.decay = Math.random() * 0.012 + 0.006;
+                this.decay = Math.random() * 0.01 + 0.005;
+                this.rotation = Math.random() * Math.PI * 2;
+                this.rotSpeed = Math.random() * 0.04 - 0.02;
             }
 
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
                 this.alpha -= this.decay;
+                this.rotation += this.rotSpeed;
             }
 
             draw() {
                 ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
                 ctx.globalAlpha = this.alpha;
-                ctx.shadowBlur = this.isAmbient ? 3 : 6;
-                ctx.shadowColor = '#b6becb';
+                ctx.shadowBlur = this.isAmbient ? 4 : 8;
+                ctx.shadowColor = '#c4a49c';
                 ctx.beginPath();
                 ctx.fillStyle = this.color + this.alpha + ')';
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.ellipse(0, 0, this.size, this.size * 1.5, 0, 0, Math.PI * 2);
                 ctx.fill();
                 ctx.restore();
             }
