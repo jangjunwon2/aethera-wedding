@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Optimization -->
+    <title>에테라(AETHERA) | 1초의 찰나, 영화가 되는 예식</title>
+    <meta name="description" content="하객들 기억 속에 '뷔페 밥 맛있었다'만 남는 뻔한 결혼식은 이제 그만. 실크 베일 신부 입장부터 플로팅 링, 링 프롬 로즈, 빛의 나비 드론까지. 하객 모두의 탄성이 터지는 1% 시네마틱 본식 연출.">
+    <meta name="keywords" content="웨딩 연출, 이색 결혼식, 나비 드론, 반지 공중부양, 플로팅 링, 링 프롬 로즈, 실크 신부입장, 스파클라, 하우스웨딩, 예식 이벤트, 에테라, AETHERA">
+    <meta property="og:title" content="에테라(AETHERA) | 1초의 찰나, 영화가 되는 예식">
+    <meta property="og:description" content="하객 모두가 일제히 핸드폰을 들어 촬영하는 압도적인 순간. 에테라 시네마틱 웨딩 연출.">
+    
+    <!-- CSS and Fonts -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Dynamic Canvas Background -->
+    <canvas id="canvas-bg"></canvas>
+
+    <!-- Header Navigation (Elegantly Renamed Customer-Facing Labels) -->
+    <header id="header">
+        <div class="container nav-container">
+            <a href="#" class="logo" id="nav-logo">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> AETHERA<span>.</span>
+            </a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#story" class="nav-link">에테라 스토리</a></li>
+                <li><a href="#empathy" class="nav-link">예식의 차이</a></li>
+                <li><a href="#programs" class="nav-link">시네마틱 연출</a></li>
+                <li><a href="#packages" class="nav-link">세트 패키지</a></li>
+                <li><a href="#safety" class="nav-link">식장 반입안내</a></li>
+                <li><a href="b2b.html" class="nav-link" style="color: var(--gold);"><i class="fa-solid fa-handshake"></i> B2B 제휴</a></li>
+                <li><a href="#contact" class="btn btn-primary" style="padding: 10px 24px; font-size: 14px;" id="nav-quote-btn">세부 가격표 받기</a></li>
+            </ul>
+
+            <button class="nav-toggle" id="nav-toggle" aria-label="메뉴 열기">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- ==========================================================================
+             [1단계] 최상단 훅: 생애 단 한 번뿐인 순간 (Customer-Facing Bright Wedding Hero Section)
+             ========================================================================== -->
+        <section class="funnel-anxiety" id="story">
+            <div class="container reveal active">
+                <div class="anxiety-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> 1% CINEMATIC WEDDING EXPERIENCE</div>
+                <h1 class="anxiety-title">
+                    하객들 기억 속에 '오늘 뷔페 밥 맛있었다'<br>
+                    이 한마디만 남는 결혼식...<br>
+                    <span>정말 원하시나요?</span>
+                </h1>
+                <p class="anxiety-desc">
+                    축하해주러 온 하객들이 지루해하며 스마트폰만 쳐다보고,<br class="desktop-br">
+                    영혼 없는 형식적인 박수만 치다가 밥 먹으러 바로 가버리는 예식.<br><br>
+                    수천만 원을 들여 생애 단 한 번 준비한 내 결혼식이<br class="desktop-br">
+                    그렇게 밋밋하게 지나간다면... 얼마나 아쉽고 허탈할까요?
+                </p>
+                <div class="hero-ctas">
+                    <a href="#empathy" class="btn btn-outline" id="anxiety-cta-learn"><i class="fa-solid fa-wand-magic-sparkles"></i> 남들과 다른 레전드 결혼식의 비결 보기</a>
+                    <a href="#contact" class="btn btn-primary" id="anxiety-cta-quote"><i class="fa-solid fa-file-invoice-dollar"></i> 공식 세부 가격표 받기</a>
+                </div>
+
+                <div class="hero-badges">
+                    <div class="hero-badge-item">
+                        <div class="hero-badge-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                        <div class="hero-badge-text">
+                            <h5>하객 100% 휴대폰 촬영</h5>
+                            <p>일제히 카메라를 들게 만드는 1초</p>
+                        </div>
+                    </div>
+                    <div class="hero-badge-item">
+                        <div class="hero-badge-icon"><i class="fa-solid fa-clapperboard"></i></div>
+                        <div class="hero-badge-text">
+                            <h5>시네마틱 스토리텔링</h5>
+                            <p>지루할 틈 없는 하이라이트 무대</p>
+                        </div>
+                    </div>
+                    <div class="hero-badge-item">
+                        <div class="hero-badge-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
+                        <div class="hero-badge-text">
+                            <h5>"너희 결혼식 진짜 대박"</h5>
+                            <p>10년 후에도 극찬받는 인생 예식</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Romantic Wedding Editorial Banner (Ultra-High Visibility Bright Glass Card) -->
+                <div class="hero-wedding-banner reveal" style="margin-top: 50px; border-radius: 24px; overflow: hidden; position: relative; border: 2px solid var(--border-gold); box-shadow: 0 15px 40px rgba(197, 160, 89, 0.2);">
+                    <img src="assets/wedding_hero_editorial.jpg" alt="에테라 시네마틱 럭셔리 웨딩 연출" style="width: 100%; height: 380px; object-fit: cover; filter: brightness(0.95); display: block;">
+                    <div class="banner-overlay-card">
+                        <div>
+                            <span style="font-size: 12px; font-weight: 800; color: #855c13; letter-spacing: 2px; text-transform: uppercase;"><i class="fa-solid fa-gem"></i> HIGH-END WEDDING EDITORIAL</span>
+                            <h3 style="font-size: 24px; font-weight: 800; color: #0f172a; margin-top: 4px;">압도적 몰입감의 1% 본식 프라이빗 솔루션</h3>
+                        </div>
+                        <a href="#programs" class="btn btn-primary" style="padding: 12px 26px; font-size: 14px; box-shadow: 0 4px 15px rgba(184, 142, 54, 0.3);"><i class="fa-solid fa-circle-play"></i> 연출 시연 영상 확인하기</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             [2단계] 타깃 공감 & 경험 공유 (Funnel Step 2: Shared Experience)
+             ========================================================================== -->
+        <section class="funnel-empathy" id="empathy">
+            <div class="container">
+                <div style="text-align: center;" class="reveal">
+                    <span class="section-tag"><i class="fa-solid fa-heart"></i> REAL COUPLE STORIES</span>
+                    <h2 class="section-title">남의 결혼식에 가서 <span>'언제 끝나지?'</span>를 생각했던 경험,<br>누구나 한번쯤 있으시죠?</h2>
+                    <p class="section-desc">저 역시 수많은 결혼식에 하객으로 참석하면서 속으로 느껴왔던 솔직한 아쉬움들이었습니다.</p>
+                </div>
+
+                <div class="empathy-grid reveal">
+                    <!-- Empathy Card 1 -->
+                    <div class="empathy-card">
+                        <div class="empathy-icon"><i class="fa-solid fa-eye-slash"></i></div>
+                        <h4>영혼 없는 형식적인 박수와 시선 분산</h4>
+                        <p>축가와 댄스가 진행되는 시간, 뻔한 축가나 뻔한 댄스, 어디서 본 듯 비슷비슷하게 밈을 따라 하는 연출에 하객들은 금세 시선을 떼고 스마트폰 뉴스나 숏폼 영상만 만지작거리며 딴짓을 하곤 합니다.</p>
+                    </div>
+
+                    <!-- Empathy Card 2 -->
+                    <div class="empathy-card">
+                        <div class="empathy-icon"><i class="fa-solid fa-ghost"></i></div>
+                        <h4>멀리서 잘 보이지도 않는 밋밋한 순서</h4>
+                        <p>예물 교환식이나 신랑신부 등장 때 멀리서는 표정조차 보이지 않아 하객들이 집중하지 못하고 식당 위치나 주차 시간을 먼저 찾습니다.</p>
+                    </div>
+
+                    <!-- Empathy Card 3 -->
+                    <div class="empathy-card">
+                        <div class="empathy-icon"><i class="fa-solid fa-utensils"></i></div>
+                        <h4>식 종료 후 남는 건 '식대'와 '뷔페' 평가뿐</h4>
+                        <p>주인공인 두 사람의 아름다운 서사보다는 "오늘 뷔페 밥 맛있었네", "홀 인테리어 예쁘네"라는 차가운 식장 평가만 남아 허탈해집니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             [3단계] 해결에 대한 희망 제시 (Funnel Step 3: Hope & Transformation)
+             ========================================================================== -->
+        <section class="funnel-hope" id="hope">
+            <div class="container">
+                <div style="text-align: center;" class="reveal">
+                    <span class="section-tag">AETHERA REVOLUTION</span>
+                    <h2 class="section-title">결혼식은 지루하게 지나가는 통과의례가 아니라,<br>두 사람이 가장 빛나는 주인공이 되는 <span>'단 하나의 영화'</span>여야 합니다</h2>
+                    <p class="section-desc">
+                        문이 열리는 첫 1초의 순간부터 하객들의 탄성과 환호가 터져 나오고,<br>
+                        예식이 끝난 후에도 "오늘 결혼식 진짜 잊지 못할 만큼 특별했어!"라는 진심 어린 찬사를 받는 본식 무대.<br>
+                        에테라만의 1% 시네마틱 연출공학으로 평범했던 예식을 최고의 명작으로 완성해 드립니다.
+                    </p>
+                </div>
+
+                <!-- High-Contrast Side-by-Side Comparison Table -->
+                <div class="transformation-box reveal">
+                    <div style="text-align: center; margin-bottom: 30px;">
+                        <span class="section-tag" style="background: rgba(212,175,55,0.12); border-color: var(--gold); color: var(--gold);"><i class="fa-solid fa-code-compare"></i> COMPREHENSIVE COMPARISON</span>
+                        <h3 style="font-size: 28px; font-weight: 800; color: var(--text-main); margin-top: 8px;">일반 예식 vs 에테라 시네마틱 예식 비교</h3>
+                    </div>
+
+                    <div class="transformation-table">
+                        <!-- Table Header -->
+                        <div class="trans-table-header">
+                            <div class="header-col before">
+                                <i class="fa-solid fa-circle-xmark"></i> 일반적인 평범한 예식
+                            </div>
+                            <div class="header-col after">
+                                <i class="fa-solid fa-crown"></i> 에테라 시네마틱 예식 <span>[시그니처]</span>
+                            </div>
+                        </div>
+
+                        <!-- Table Row 1: 등장 -->
+                        <div class="trans-table-row">
+                            <div class="col-before">
+                                <span class="row-label">신부 메인 입장</span>
+                                <p><i class="fa-solid fa-xmark"></i> 뻔한 입장 순서로 하객들이 멀뚱히 쳐다보는 밋밋함</p>
+                            </div>
+                            <div class="col-after">
+                                <span class="row-label-after">실크 베일 일루전</span>
+                                <p><i class="fa-solid fa-check"></i> 문 열리기 전 순백 실크 비행으로 전율의 등장 연출</p>
+                            </div>
+                        </div>
+
+                        <!-- Table Row 2: 예물 1 -->
+                        <div class="trans-table-row">
+                            <div class="col-before">
+                                <span class="row-label">예물 교환식</span>
+                                <p><i class="fa-solid fa-xmark"></i> 멀리서 잘 보이지 않아 하객들이 딴짓하는 단순 전달</p>
+                            </div>
+                            <div class="col-after">
+                                <span class="row-label-after">플로팅 링</span>
+                                <p><i class="fa-solid fa-check"></i> 반지가 공중으로 떠올라 전해지는 마이크로 레비테이션 마술</p>
+                            </div>
+                        </div>
+
+                        <!-- Table Row 3: 예물 2 -->
+                        <div class="trans-table-row">
+                            <div class="col-before">
+                                <span class="row-label">로맨틱 예물 전달</span>
+                                <p><i class="fa-solid fa-xmark"></i> 감흥 없이 진행되는 형식적인 반지 케이스 전달</p>
+                            </div>
+                            <div class="col-after">
+                                <span class="row-label-after">링 프롬 로즈</span>
+                                <p><i class="fa-solid fa-check"></i> 마술 장미 봉오리 케이스에서 피어나는 로맨틱 예물 전달</p>
+                            </div>
+                        </div>
+
+                        <!-- Table Row 4: 드론 화동 -->
+                        <div class="trans-table-row">
+                            <div class="col-before">
+                                <span class="row-label">특수 화동 연출</span>
+                                <p><i class="fa-solid fa-xmark"></i> 시선집중 요소가 부족하고 어수선한 동선 처리</p>
+                            </div>
+                            <div class="col-after">
+                                <span class="row-label-after">빛의 나비 드론</span>
+                                <p><i class="fa-solid fa-check"></i> 암전 속 버진로드를 날아와 예물을 안착시키는 나비 화동</p>
+                            </div>
+                        </div>
+
+                        <!-- Table Row 5: 피날레 -->
+                        <div class="trans-table-row">
+                            <div class="col-before">
+                                <span class="row-label">행진 & 피날레</span>
+                                <p><i class="fa-solid fa-xmark"></i> 식 끝난 뒤 "오늘 뷔페 밥 맛있다" 한마디만 기억됨</p>
+                            </div>
+                            <div class="col-after">
+                                <span class="row-label-after">듀얼 피날레</span>
+                                <p><i class="fa-solid fa-check"></i> 테이블 스파클라 점화와 파도타기 꽃가루 발사의 압도적 연출</p>
+                            </div>
+                        </div>
+
+                        <!-- Table Row 6: 하이라이트 -->
+                        <div class="trans-table-row">
+                            <div class="col-before">
+                                <span class="row-label">기억 & SNS 기록</span>
+                                <p><i class="fa-solid fa-xmark"></i> 릴스나 앨범 표지로 쓸 만한 결정적 하이라이트 컷 부족</p>
+                            </div>
+                            <div class="col-after">
+                                <span class="row-label-after">100% 바이럴 컷</span>
+                                <p><i class="fa-solid fa-check"></i> 하객 전원 핸드폰 촬영, 10년 후에도 극찬받는 인생 명작 연출</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             [4단계] 구체적인 해결법: 연출 라인업 (Funnel Step 4: Concrete Solution)
+             ========================================================================== -->
+        <section class="programs" id="programs">
+            <div class="container">
+                <div style="text-align: center;" class="reveal">
+                    <span class="section-tag">CINEMATIC MEDIA SHOWCASE</span>
+                    <h2 class="section-title">본식 연출 <span>시연 영상 & 라인업</span></h2>
+                    <p class="section-desc">모든 시연 영상은 1:1 세로/정사각형 비율로 제작되어 웹사이트에서 즉시 확인 가능합니다.</p>
+                </div>
+
+                <div class="program-grid reveal">
+                    <!-- Item 1: 실크 베일 일루전 (1:1 Video) -->
+                    <div class="program-card" id="card-silk">
+                        <div class="media-container">
+                            <video src="assets/videos/silk_veil_1to1.mp4" controls playsinline muted loop autoplay poster="assets/hero_magic_wedding.png"></video>
+                            <span class="media-badge"><i class="fa-solid fa-circle-play"></i> 1:1 시연 영상</span>
+                        </div>
+                        <div class="program-step">STEP 1. 신부 메인 입장</div>
+                        <div class="program-title">
+                            실크 베일 일루전
+                            <span class="program-title-badge">시그니처 등장</span>
+                        </div>
+                        <p class="program-desc">
+                            신부 대기실 문 뒤쪽으로 대형 백색 실크 베일이 허공으로 솟구치며 바람처럼 문 틈 사이로 빨려 들어가는 신비로운 장면! 실크 수거와 동시에 BGM 클라이맥스에 맞춰 문이 열리며 완벽한 시선 집중에 신부가 웅장하게 등장합니다.
+                        </p>
+                        <div class="program-highlights">
+                            <span class="highlight-chip">전율의 등장</span>
+                            <span class="highlight-chip">하객 시선 100% 집중</span>
+                            <span class="highlight-chip">인스타 릴스 인기 1위</span>
+                        </div>
+                    </div>
+
+                    <!-- Item 2: 체어 일루전 (1:1 Video - Coming Soon) -->
+                    <div class="program-card" id="card-chair" style="border: 1.5px dashed var(--gold);">
+                        <div class="media-container">
+                            <video src="assets/videos/chair_illusion_1to1.mp4" controls playsinline muted loop poster="assets/chair_teleportation.png"></video>
+                            <span class="media-badge" style="background: rgba(184, 142, 54, 0.95); color: #ffffff;"><i class="fa-solid fa-clock"></i> 1:1 오픈예정 시연 영상</span>
+                        </div>
+                        <div class="program-step">STEP 1. 신랑 메인 입장</div>
+                        <div class="program-title">
+                            체어 일루전
+                            <span class="program-title-badge" style="background: #fef3c7; color: #78350f;">COMING SOON</span>
+                        </div>
+                        <p class="program-desc">
+                            <strong>[오픈 예정 준비 중]</strong> 쑥스럽고 어색한 신랑 입장은 가라! 무대 중앙 빈 의자에 천을 덮었다 걷어내는 짧은 1초의 찰나, 신랑이 기적처럼 의자 위에서 순간이동으로 깜짝 등장하는 유쾌하고 강렬한 반전 등장 무대!
+                        </p>
+                        <div class="program-highlights">
+                            <span class="highlight-chip">1초 순간이동</span>
+                            <span class="highlight-chip">신랑 반전 무대</span>
+                            <span class="highlight-chip">하객 환호 폭발</span>
+                        </div>
+                    </div>
+
+                    <!-- Item 3: 플로팅 링 (Separated Item 1) -->
+                    <div class="program-card" id="card-floating-ring">
+                        <div class="media-container">
+                            <img src="assets/ring_magic_1to1.jpg" alt="플로팅 링 (반지 공중부양) 마술 연출">
+                            <span class="media-badge" style="background: rgba(15, 23, 42, 0.9); color: #ffffff;"><i class="fa-solid fa-video"></i> 영상 추가 예정</span>
+                        </div>
+                        <div class="program-step">STEP 2. 예물 교환식 (반지 공중부양)</div>
+                        <div class="program-title">
+                            플로팅 링 (Floating Ring)
+                            <span class="program-title-badge">1:1 레슨 포함</span>
+                        </div>
+                        <p class="program-desc">
+                            신랑의 손끝에서 반지가 중력을 극복하고 공중으로 은은하게 떠올라 신부에게 전해지는 마이크로 레비테이션 마술 연출! 1:1 오프라인 레슨 + 전용 교육 영상 + 특수 트릭 도구가 기본 제공됩니다.
+                        </p>
+                        <div class="program-highlights">
+                            <span class="highlight-chip">1:1 오프라인 레슨</span>
+                            <span class="highlight-chip">반지 고공부양</span>
+                            <span class="highlight-chip">감동 프러포즈</span>
+                        </div>
+                    </div>
+
+                    <!-- Item 4: 링 프롬 로즈 (Separated Item 2) -->
+                    <div class="program-card" id="card-ring-from-rose">
+                        <div class="media-container">
+                            <img src="assets/rose_ring_1to1.jpg" alt="링 프롬 로즈 마술 연출">
+                            <span class="media-badge" style="background: rgba(15, 23, 42, 0.9); color: #ffffff;"><i class="fa-solid fa-video"></i> 영상 추가 예정</span>
+                        </div>
+                        <div class="program-step">STEP 2. 예물 교환식 (장미 케이스 마술)</div>
+                        <div class="program-title">
+                            링 프롬 로즈 (Ring from Rose)
+                            <span class="program-title-badge">1:1 레슨 포함</span>
+                        </div>
+                        <p class="program-desc">
+                            신부 등장 후/예물 교환 시 실크 안에서 마술처럼 붉은 장미 봉오리 케이스가 피어나 등장 ➔ 케이스를 열어 반짝이는 반지를 신부에게 로맨틱하게 전달하는 스토리텔링 연출! 1:1 레슨 + 트릭 도구가 기본 제공됩니다.
+                        </p>
+                        <div class="program-highlights">
+                            <span class="highlight-chip">1:1 오프라인 레슨</span>
+                            <span class="highlight-chip">장미 케이스 연출</span>
+                            <span class="highlight-chip">스토리텔링 예물</span>
+                        </div>
+                    </div>
+
+                    <!-- Item 5: 빛의 나비 드론 (1:1 Video) -->
+                    <div class="program-card" id="card-butterfly">
+                        <div class="media-container">
+                            <video src="assets/videos/butterfly_drone_1to1.mp4" controls playsinline muted loop autoplay poster="assets/butterfly_drone_ring.png"></video>
+                            <span class="media-badge"><i class="fa-solid fa-circle-play"></i> 1:1 시연 영상</span>
+                        </div>
+                        <div class="program-step">STEP 2. 예물 교환식 (드론 비행)</div>
+                        <div class="program-title">
+                            빛의 나비 드론 (Flutter)
+                            <span class="program-title-badge">3단계 선택</span>
+                        </div>
+                        <p class="program-desc">
+                            식장이 일시 암전되는 엄숙한 순간, 은은하게 빛나는 LED 나비 비행체가 버진로드 상공을 미끄러지듯 날아가 예물 반지를 전달합니다. 단일 비행부터 스토이라인 2회 비행, 2대 나비 입체 군집 비행(Luxury)까지 선택 가능합니다.
+                        </p>
+                        <div class="program-highlights">
+                            <span class="highlight-chip">Basic (비행 1회)</span>
+                            <span class="highlight-chip">Premium (비행 2회)</span>
+                            <span class="highlight-chip">Luxury (2대 군집비행)</span>
+                        </div>
+                    </div>
+
+                    <!-- Item 6: 테이블 스파클라 (Basic & Safety Glass) (1:1 Video) -->
+                    <div class="program-card" id="card-sparkle">
+                        <div class="media-container">
+                            <video src="assets/videos/sparkle_1to1.mp4" controls playsinline muted loop autoplay poster="assets/special_effects_showcase.png"></video>
+                            <span class="media-badge"><i class="fa-solid fa-circle-play"></i> 1:1 시연 영상</span>
+                        </div>
+                        <div class="program-step">STEP 3. 버진로드 라이팅</div>
+                        <div class="program-title">
+                            테이블 스파클라 (Basic & Safety)
+                            <span class="program-title-badge">기본 & 안심유리관</span>
+                        </div>
+                        <p class="program-desc">
+                            플래시 불꽃 마술 연출 후 버진로드/하객 테이블 스파클라와 촛불이 순차 점화! 기본형 점화 연출부터, 연기·분진·화재 위험을 차단하는 특수 내열 세이프티 글래스 옵션까지 선택 가능합니다.
+                        </p>
+                        <div class="program-highlights">
+                            <span class="highlight-chip">테이블 점화 기본형</span>
+                            <span class="highlight-chip">세이프티 글래스 옵션</span>
+                            <span class="highlight-chip">기본 6대 세팅</span>
+                        </div>
+                    </div>
+
+                    <!-- Item 7: 웨딩 팟 (꽃가루 발사) (1:1 Placeholder Image) -->
+                    <div class="program-card" id="card-pot">
+                        <div class="media-container">
+                            <img src="assets/wedding_pot_1to1.jpg" alt="웨딩 팟 꽃가루 발사">
+                            <span class="media-badge" style="background: rgba(15, 23, 42, 0.9); color: #ffffff;"><i class="fa-solid fa-video"></i> 영상 추가 예정</span>
+                        </div>
+                        <div class="program-step">STEP 4. 행진 & 키스타임 피날레</div>
+                        <div class="program-title">
+                            웨딩 팟 (꽃가루 발사)
+                            <span class="program-title-badge">원샷 & 웨이브</span>
+                        </div>
+                        <p class="program-desc">
+                            행진 클라이맥스 순간 모든 팟에서 꽃가루가 동시에 발사되는 <strong>[원샷 꽃가루 발사]</strong>와, 버진로드를 따라 신랑신부의 발걸음에 맞춰 파도타듯 연속 연출되는 <strong>[시퀀스 꽃가루 발사]</strong>! 스파클라와 연계하여 듀얼 피날레로 진행 가능합니다.
+                        </p>
+                        <div class="program-highlights">
+                            <span class="highlight-chip">임팩트 원샷 발사</span>
+                            <span class="highlight-chip">시퀀스 파도타기 발사</span>
+                            <span class="highlight-chip">스파클 연계 듀얼 피날레</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Smart Set Package Guide Section (No explicit prices displayed) -->
+        <section class="packages" id="packages">
+            <div class="container">
+                <div style="text-align: center;" class="reveal">
+                    <span class="section-tag">SMART BUNDLES</span>
+                    <h2 class="section-title">동선 맞춤형 <span>스마트 세트 패키지</span></h2>
+                    <p class="section-desc">
+                        예식 동선과 신랑신부님의 감동 포인트에 맞춘 대표 세트 조합입니다.<br>
+                        <strong style="color: #855c13; font-weight: 700;">※ 세부 가격 및 1:1 맞춤 견적은 아래 상담 신청 시 세부 가격표 PDF로 즉시 안내해 드립니다.</strong>
+                    </p>
+                </div>
+
+                <div class="packages-grid reveal">
+                    <!-- Package A -->
+                    <div class="pkg-card">
+                        <div class="pkg-header">
+                            <span class="pkg-tag">STEP 1 + 2 COMBINATION</span>
+                            <h3 class="pkg-name">[A] 로맨틱 프러포즈 팩</h3>
+                            <div class="pkg-benefit"><i class="fa-solid fa-gift"></i> 세트 할인 혜택 적용</div>
+                            <p style="font-size: 13px; color: var(--text-muted);">신부 등장의 전율과 신랑의 정성 어린 1:1 마술 예물 전달 세트</p>
+                        </div>
+                        <ul class="pkg-list">
+                            <li><i class="fa-solid fa-check"></i> <strong>실크 베일 일루전</strong> (신부 메인 입장)</li>
+                            <li><i class="fa-solid fa-check"></i> <strong>링 프롬 로즈</strong> (장미 케이스 / 레슨 포함)</li>
+                            <li><i class="fa-solid fa-check"></i> 신랑 1:1 오프라인 레슨 & 트릭 도구 증정</li>
+                            <li><i class="fa-solid fa-check"></i> 전담 오퍼레이터 파견 & 동선 체크</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-outline" style="width: 100%;">상담 문의 & 견적 신청</a>
+                    </div>
+
+                    <!-- Package B: BEST Choice -->
+                    <div class="pkg-card featured">
+                        <div class="pkg-badge">인기 1위 BEST★</div>
+                        <div class="pkg-header">
+                            <span class="pkg-tag">입장 + 드론 + 피날레 풀케어</span>
+                            <h3 class="pkg-name">[B] 시네마틱 메인 팩</h3>
+                            <div class="pkg-benefit"><i class="fa-solid fa-fire"></i> 가장 높은 선호도 세트</div>
+                            <p style="font-size: 13px; color: var(--text-muted);">입장부터 나비드론 예물 안착, 행진 플라워 피날레까지 완벽 풀케어</p>
+                        </div>
+                        <ul class="pkg-list">
+                            <li><i class="fa-solid fa-check"></i> <strong>실크 베일 일루전</strong> (신부 메인 입장)</li>
+                            <li><i class="fa-solid fa-check"></i> <strong>빛의 나비 드론 Premium</strong> (2회 스토리 비행)</li>
+                            <li><i class="fa-solid fa-check"></i> <strong>웨딩 팟</strong> (원샷 or 시퀀스 꽃가루 발사)</li>
+                            <li><i class="fa-solid fa-check"></i> Plan B 마술적 Failsafe 매뉴얼 보장</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-primary" style="width: 100%;">상담 문의 & 견적 신청</a>
+                    </div>
+
+                    <!-- Package C: HOT Dual Finale -->
+                    <div class="pkg-card">
+                        <div class="pkg-header">
+                            <span class="pkg-tag">DUAL FINALE SPECIAL</span>
+                            <h3 class="pkg-name">[C] 듀얼 피날레 팩</h3>
+                            <div class="pkg-benefit"><i class="fa-solid fa-wand-magic-sparkles"></i> 최고 할인율 파격 세트</div>
+                            <p style="font-size: 13px; color: var(--text-muted);">스파클라 연쇄 점화와 키스타임 꽃가루 발사로 완성하는 압도적 피날레</p>
+                        </div>
+                        <ul class="pkg-list">
+                            <li><i class="fa-solid fa-check"></i> <strong>실크 베일 일루전</strong> (신부 입장)</li>
+                            <li><i class="fa-solid fa-check"></i> <strong>플로팅 링</strong> (반지 공중부양 / 레슨 포함)</li>
+                            <li><i class="fa-solid fa-check"></i> <strong>[행진 듀얼] 테이블 스파클라</strong> (기본 6대)</li>
+                            <li><i class="fa-solid fa-check"></i> <strong>[행진 듀얼] 웨딩 팟</strong> (꽃가루 발사)</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-outline" style="width: 100%;">상담 문의 & 견적 신청</a>
+                    </div>
+
+                    <!-- Package D: VVIP Signature -->
+                    <div class="pkg-card">
+                        <div class="pkg-header">
+                            <span class="pkg-tag">VVIP ALL-IN-ONE</span>
+                            <h3 class="pkg-name">[D] VVIP 시그니처 팩</h3>
+                            <div class="pkg-benefit"><i class="fa-solid fa-crown"></i> 풀옵션 프리미엄 세트</div>
+                            <p style="font-size: 13px; color: var(--text-muted);">예식의 시작부터 끝까지 영화 속 주연이 되는 완벽한 올인원 연출</p>
+                        </div>
+                        <ul class="pkg-list">
+                            <li><i class="fa-solid fa-check"></i> <strong>실크 베일 일루전</strong> (신부 입장)</li>
+                            <li><i class="fa-solid fa-check"></i> <strong>플로팅 링</strong> (반지 공중부양)</li>
+                            <li><i class="fa-solid fa-check"></i> <strong>빛의 나비 드론 Luxury</strong> (2대 동시 비행)</li>
+                            <li><i class="fa-solid fa-check"></i> <strong>세이프티 글래스 스파클</strong> + <strong>웨딩 팟 듀얼</strong></li>
+                        </ul>
+                        <a href="#contact" class="btn btn-outline" style="width: 100%;">상담 문의 & 견적 신청</a>
+                    </div>
+                </div>
+
+                <!-- Add-on Benefit Banner -->
+                <div class="banner-box reveal">
+                    <div class="banner-text">
+                        <h4><i class="fa-solid fa-gift"></i> 세트 패키지 예약 고객 전용 혜택</h4>
+                        <p>스마트 세트 패키지를 선택하신 고객님이 추가 단품 옵션을 덧붙이실 경우 <strong>'추가 옵션 특별 할인가 (-5만원)'</strong>가 자동 적용됩니다!</p>
+                    </div>
+                    <a href="#contact" class="btn btn-primary" style="white-space: nowrap;">맞춤 견적 문의하기</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Safety & Venue Clearance Section (Updated Checklist) -->
+        <section class="safety-section" id="safety">
+            <div class="container">
+                <div class="safety-box reveal">
+                    <div class="safety-header">
+                        <i class="fa-solid fa-shield-cat safety-icon"></i>
+                        <div class="safety-title">
+                            <h3>100% 안전검증 & 예식장 사전 반입 필수 안내</h3>
+                            <p style="font-size: 14px; color: var(--text-muted); margin-top: 4px;">에테라는 오차 없는 100% 완벽한 본식을 보장하기 위해 식장 사전 체크를 무료로 조율해 드립니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="safety-checklist">
+                        <div class="chk-item">
+                            <h5>1. 실크 베일 일루전</h5>
+                            <p>신부대기실 문의 형태(개폐 방식) 및 식장 내부 에어컨/냉난방 급기 바람 영향을 식장 측과 사전 체크해야 합니다.</p>
+                        </div>
+                        <div class="chk-item">
+                            <h5>2. 빛의 나비 드론</h5>
+                            <p>실내 천장 높이, 샹들리에 크기·바닥부터의 높이·개수, RF 주파수 전파 환경 및 핀조명 암전 조절 여부를 사전 체크해야 합니다.</p>
+                        </div>
+                        <div class="chk-item">
+                            <h5>3. 테이블 스파클라</h5>
+                            <p>기본형의 경우 화재, 분진, 연기 등이 날 수 있어 식장 이용 가능 여부를 체크해야 합니다. (※ 세이프티 글래스 옵션 추가 시 99% 이용 가능)</p>
+                        </div>
+                        <div class="chk-item">
+                            <h5>4. 웨딩 팟 피날레</h5>
+                            <p>꽃가루 청소 문제 때문에 다음 예식과의 시간 텀을 확인하고 식장 측으로부터 청소 관련 사전 승인을 받아야 합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq" id="faq">
+            <div class="container">
+                <div style="text-align: center;" class="reveal">
+                    <span class="section-tag">FAQ</span>
+                    <h2 class="section-title">자주 묻는 <span>질문 & 궁금증</span></h2>
+                    <p class="section-desc">예비부부님들이 가장 자주 물어보시는 우려 사항에 솔직하고 투명하게 답해 드립니다.</p>
+                </div>
+
+                <div class="faq-list reveal">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>Q. 주말 예식 대관 시간이 촉박한데 세팅 지연 우려는 없나요?</h4>
+                            <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>전혀 걱정하지 않으셔도 됩니다. 에테라는 모든 장비와 연출 모듈을 포터블 퀵-팩으로 표준화하였습니다. 오퍼레이터가 사전 도착하여 <strong>단 12분 이내에 완벽히 세팅 및 리허설</strong>을 마치도록 세팅되어 예식 지연 리스크가 전혀 없습니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>Q. 드론 비행이나 불꽃 점화가 하객에게 위험하지 않나요?</h4>
+                            <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>에테라의 나비 비행체는 가볍고 부드러운 극초경량 모듈로 물리적 충격 위험이 전혀 없습니다. 또한 스파클라의 경우 <strong>특수 내열 유리관(Safety Glass)</strong>을 씌우는 안심 옵션을 선택하실 경우 연기, 냄새, 먼지, 불티가 전혀 튀지 않아 호텔 및 실내 홀에서도 99% 승인 가능합니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>Q. 신랑 마술 연출(플로팅 링, 링 프롬 로즈)은 일반인 신랑도 잘 배울 수 있나요?</h4>
+                            <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>네, 100% 가능합니다! '손재주가 없는 똥손 신랑님'도 10분 만에 익히실 수 있도록 <strong>1:1 전용 교육 영상 + 특수 트릭 도구 + 1회 오프라인 1:1 밀착 컨설팅 및 현장 리허설 지도</strong>가 기본 패키지에 포함되어 있어 하객들에게 감동적인 모습을 선보이실 수 있습니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>Q. 세부 단가표와 공식 견적서는 어떻게 받아보나요?</h4>
+                            <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>아래 상담 신청 폼에 예식 날짜와 식장 명칭을 남겨주시면, 검토팀이 확인 후 카카오톡 또는 이메일로 <strong>단품 세부 단가 및 패키지 할인율이 포함된 [에테라 공식 PDF 세부 가격표]</strong>를 즉시 발송해 드립니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             [5단계] 행동 유도 & 상담 신청 (Funnel Step 5: Call To Action)
+             ========================================================================== -->
+        <section class="contact" id="contact">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-info reveal">
+                        <div>
+                            <span class="section-tag">GET A QUOTE</span>
+                            <h2 class="section-title">영화 같은 예식,<br><span>지금 예약 문의</span>하세요</h2>
+                            <p class="section-desc" style="margin-bottom: 24px;">
+                                에테라의 시네마틱 본식 연출은 퀄리티 보장을 위해 <strong>하루 선착순 3팀 한정</strong>으로 예약을 진행합니다.<br>
+                                아래 폼을 작성해 주시면 <strong>공식 세부 가격표 & 1:1 맞춤 견적</strong>을 안내해 드립니다.
+                            </p>
+                        </div>
+
+                        <div class="contact-card">
+                            <h4 style="font-size: 16px; font-weight: 700; color: var(--gold); margin-bottom: 12px;"><i class="fa-solid fa-headset"></i> 빠른 상담 채널</h4>
+                            <a href="tel:010-8079-3008" class="contact-channel">
+                                <div class="channel-icon"><i class="fa-solid fa-phone"></i></div>
+                                <div>
+                                    <h5 style="font-size: 14px; font-weight: 700;">전화 상담 문의</h5>
+                                    <p style="font-size: 13px; color: var(--text-muted);">010-8079-3008 (오전 10:00 ~ 오후 8:00)</p>
+                                </div>
+                            </a>
+                            <a href="mailto:contact@aethera-wedding.com" class="contact-channel">
+                                <div class="channel-icon"><i class="fa-solid fa-envelope"></i></div>
+                                <div>
+                                    <h5 style="font-size: 14px; font-weight: 700;">이메일 문의</h5>
+                                    <p style="font-size: 13px; color: var(--text-muted);">contact@aethera-wedding.com</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Consultation Form with Separated Date & Venue Fields -->
+                    <div class="form-box reveal">
+                        <h3 style="font-size: 22px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; text-align: center;">공식 세부 가격표 & 맞춤 견적 신청</h3>
+                        <p style="font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 24px;">예식일과 식장명을 입력하시면 세부 단가표를 보내드립니다.</p>
+                        
+                        <form id="booking-form">
+                            <div class="form-group">
+                                <label class="form-label" for="user-name">신랑 또는 신부님 성함 *</label>
+                                <input class="form-control" type="text" id="user-name" name="user-name" placeholder="예: 김민우 / 이서연" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="user-phone">연락처 (카카오톡 받으실 번호) *</label>
+                                <input class="form-control" type="tel" id="user-phone" name="user-phone" placeholder="예: 010-1234-5678" required>
+                            </div>
+
+                            <!-- Separated Form Fields: Date & Venue -->
+                            <div class="form-group-row">
+                                <div>
+                                    <label class="form-label" for="wedding-date">예정 예식일 *</label>
+                                    <input class="form-control" type="text" id="wedding-date" name="wedding-date" placeholder="예: 2026년 10월 24일" required>
+                                </div>
+                                <div>
+                                    <label class="form-label" for="wedding-venue">예정 웨딩 베뉴 (식장명) *</label>
+                                    <input class="form-control" type="text" id="wedding-venue" name="wedding-venue" placeholder="예: 빌라드지디 청담 2층" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">관심 본식 연출 옵션 (중복 선택 가능)</label>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label"><input type="checkbox" name="interest" value="실크 베일 신부입장"> 실크 베일 신부입장</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="interest" value="플로팅 링 (반지 공중부양)"> 플로팅 링 (공중부양)</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="interest" value="링 프롬 로즈 (장미 케이스)"> 링 프롬 로즈 (장미)</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="interest" value="빛의 나비 드론"> 빛의 나비 드론</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="interest" value="세이프티 글래스 스파클"> 세이프티 스파클라</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="interest" value="웨딩 팟 플라워 피날레"> 웨딩 팟 피날레</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="interest" value="체어 일루전 (오픈예정)"> 체어 일루전 (오픈예정)</label>
+                                    <label class="checkbox-label"><input type="checkbox" name="interest" value="스마트 세트 패키지 전체"> 스마트 세트 패키지 전체</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="message">상세 문의 / 요청 사항</label>
+                                <textarea class="form-control" id="message" name="message" placeholder="식장 환경이나 궁금하신 내용을 적어주세요."></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 16px;" id="form-submit-btn">
+                                <i class="fa-solid fa-paper-plane"></i> 세부 가격표 & 맞춤 견적 신청하기
+                            </button>
+                        </form>
+
+                        <div class="form-success" id="form-success">
+                            <div class="form-success-icon"><i class="fa-solid fa-circle-check"></i></div>
+                            <h3 style="font-size: 20px; font-weight: 700; color: var(--gold);">상담 신청이 완료되었습니다!</h3>
+                            <p style="color: var(--text-muted); margin-top: 10px; font-size: 14px; line-height: 1.6;">
+                                입력해주신 연락처로 담당 디렉터가 예식장 반입 조건 확인 후<br>
+                                <strong>[에테라 공식 세부 가격표 PDF 및 맞춤 견적]</strong>을 빠른 시간 내 전달드리겠습니다. 감사합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Actions -->
+    <div class="floating-actions">
+        <a href="https://open.kakao.com/o/sAetheraWedding" target="_blank" class="float-btn float-kakao" title="카카오톡 1:1 상담" aria-label="카카오톡 1:1 상담">
+            <i class="fa-comment fa-solid"></i>
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <p style="font-family: var(--font-heading); font-weight: 800; font-size: 20px; color: var(--text-main); margin-bottom: 4px; letter-spacing: 2px;">AETHERA</p>
+                    <p style="font-size: 13px; color: var(--text-muted);">© 2026 에테라 시네마틱 웨딩 솔루션. All Rights Reserved.</p>
+                </div>
+
+                <div style="display: flex; gap: 24px; align-items: center;">
+                    <a href="b2b.html" style="color: var(--gold); text-decoration: none; font-size: 14px; font-weight: 600;"><i class="fa-solid fa-handshake" style="margin-right: 6px;"></i>제휴 파트너십 (B2B) 문의</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AETHERA | 상담 및 제휴 관리자 콘솔</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Admin specific custom style overrides */
+        body {
+            min-height: 100vh;
+        }
+
+        /* Login Overlay */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 7, 18, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-smooth);
+        }
+
+        .login-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 28px;
+            padding: 48px;
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        .login-logo {
+            font-size: 32px;
+            color: var(--text-main);
+            font-family: var(--font-heading);
+            font-weight: 800;
+            margin-bottom: 30px;
+        }
+        .login-logo span {
+            color: var(--gold);
+        }
+
+        .login-error {
+            color: #ff4d6d;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* Dashboard Container */
+        .admin-dashboard {
+            display: none;
+            padding: 120px 0 60px;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--border-glass);
+            padding-bottom: 24px;
+        }
+
+        .admin-title h2 {
+            font-family: var(--font-heading);
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .admin-title p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Metrics Bar */
+        .metrics-bar {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 24px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .metric-info h4 {
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .metric-info .metric-num {
+            font-family: var(--font-heading);
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--text-main);
+            line-height: 1;
+        }
+
+        .metric-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .metric-total .metric-icon {
+            background: rgba(155, 93, 229, 0.15);
+            color: var(--primary);
+            border-color: rgba(155, 93, 229, 0.3);
+        }
+        .metric-pending .metric-icon {
+            background: rgba(212, 175, 55, 0.12);
+            color: var(--gold);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+        .metric-completed .metric-icon {
+            background: rgba(82, 183, 136, 0.15);
+            color: #52b788;
+            border-color: rgba(82, 183, 136, 0.3);
+        }
+        .metric-views .metric-icon {
+            background: rgba(0, 180, 216, 0.15);
+            color: #00b4d8;
+            border-color: rgba(0, 180, 216, 0.3);
+        }
+        .metric-conversion .metric-icon {
+            background: rgba(255, 77, 109, 0.15);
+            color: #ff4d6d;
+            border-color: rgba(255, 77, 109, 0.3);
+        }
+
+        /* Controls Panel */
+        .controls-panel {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Table Container */
+        .table-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            margin-bottom: 40px;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .admin-table th, .admin-table td {
+            padding: 18px 24px;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .admin-table th {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.02);
+            font-size: 13px;
+            letter-spacing: 0.5px;
+        }
+
+        .admin-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .admin-table tbody tr {
+            transition: var(--transition-smooth);
+        }
+
+        .admin-table tbody tr:hover {
+            background: rgba(255, 255, 255, 0.015);
+        }
+
+        /* Badges and dropdown styles */
+        .badge-type {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .badge-b2c {
+            background: rgba(155, 93, 229, 0.15);
+            color: #b388ff;
+            border: 1px solid rgba(155, 93, 229, 0.3);
+        }
+
+        .badge-b2b-venue {
+            background: rgba(212, 175, 55, 0.12);
+            color: var(--gold);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .badge-b2b-planner {
+            background: rgba(0, 180, 216, 0.15);
+            color: #90e0ef;
+            border: 1px solid rgba(0, 180, 216, 0.3);
+        }
+
+        .select-status {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-glass);
+            border-radius: 8px;
+            color: var(--text-main);
+            padding: 6px 10px;
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .select-status:focus {
+            outline: none;
+        }
+
+        .status-pending {
+            color: #ffd166;
+            border-color: rgba(255, 209, 102, 0.4);
+            background: rgba(255, 209, 102, 0.05);
+        }
+        .status-contacted {
+            color: #4ea8de;
+            border-color: rgba(78, 168, 222, 0.4);
+            background: rgba(78, 168, 222, 0.05);
+        }
+        .status-completed {
+            color: #06d6a0;
+            border-color: rgba(6, 214, 160, 0.4);
+            background: rgba(6, 214, 160, 0.05);
+        }
+
+        .btn-action-delete {
+            background: rgba(255, 77, 109, 0.1);
+            border: 1px solid rgba(255, 77, 109, 0.2);
+            color: #ff4d6d;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-action-delete:hover {
+            background: #ff4d6d;
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        .no-data {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 60px 0;
+            font-size: 15px;
+        }
+
+        @media (max-width: 992px) {
+            .metrics-bar {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+            .controls-panel {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+            .table-container {
+                overflow-x: auto;
+            }
+            .admin-table {
+                min-width: 900px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Dynamic Particle Background -->
+    <canvas id="canvas-bg"></canvas>
+
+    <!-- Admin Login Screen -->
+    <div class="login-overlay" id="login-overlay">
+        <div class="login-box">
+            <div class="login-logo"><i class="fa-solid fa-wand-magic-sparkles"></i> AETHERA<span>.</span></div>
+            <h3 style="margin-bottom: 20px; font-weight: 700;">상담 관리 콘솔 로그인</h3>
+            <form id="login-form">
+                <div class="form-group" style="text-align: left;">
+                    <label class="form-label" for="admin-password">관리자 인증키</label>
+                    <input class="form-control" type="password" id="admin-password" placeholder="비밀번호를 입력하세요" required autofocus>
+                    <div class="login-error" id="login-error">비밀번호가 올바르지 않습니다.</div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px;">로그인</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Header -->
+    <header id="header" style="background: rgba(10, 7, 18, 0.85);">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> AETHERA<span>.</span>
+            </a>
+            <ul class="nav-menu">
+                <li><span style="color: var(--text-muted); font-size: 14px;"><i class="fa-solid fa-circle-user" style="color: var(--gold); margin-right: 6px;"></i>시스템 관리자 모드</span></li>
+                <li><button class="btn btn-outline" id="btn-logout" style="padding: 8px 20px; font-size: 13px;">로그아웃</button></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Admin Dashboard Main Container -->
+    <main class="admin-dashboard" id="admin-dashboard">
+        <div class="container">
+            
+            <!-- Dashboard Title Banner -->
+            <div class="admin-header">
+                <div class="admin-title">
+                    <h2>상담 및 제휴 현황판</h2>
+                    <p>실시간으로 고객(B2C) 및 파트너(B2B) 상담 접수 현황을 확인하고 진행 상태를 업데이트합니다.</p>
+                </div>
+            </div>
+
+            <!-- Dashboard Metric Summary Cards -->
+            <div class="metrics-bar">
+                <!-- Metric: Page Views -->
+                <div class="metric-card metric-views">
+                    <div class="metric-info">
+                        <h4>누적 방문자수</h4>
+                        <div class="metric-num" id="metric-views-num">0</div>
+                    </div>
+                    <div class="metric-icon"><i class="fa-solid fa-eye"></i></div>
+                </div>
+                <!-- Metric: Total Inquiries -->
+                <div class="metric-card metric-total">
+                    <div class="metric-info">
+                        <h4>총 문의 건수</h4>
+                        <div class="metric-num" id="metric-total-num">0</div>
+                    </div>
+                    <div class="metric-icon"><i class="fa-solid fa-envelope"></i></div>
+                </div>
+                <!-- Metric: Conversion Rate -->
+                <div class="metric-card metric-conversion">
+                    <div class="metric-info">
+                        <h4>문의 전환율</h4>
+                        <div class="metric-num" id="metric-conversion-num">0.0%</div>
+                    </div>
+                    <div class="metric-icon"><i class="fa-solid fa-chart-line"></i></div>
+                </div>
+                <!-- Metric: Pending -->
+                <div class="metric-card metric-pending">
+                    <div class="metric-info">
+                        <h4>답변 대기중</h4>
+                        <div class="metric-num" id="metric-pending-num">0</div>
+                    </div>
+                    <div class="metric-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+                </div>
+                <!-- Metric: Completed -->
+                <div class="metric-card metric-completed">
+                    <div class="metric-info">
+                        <h4>상담/계약 완료</h4>
+                        <div class="metric-num" id="metric-completed-num">0</div>
+                    </div>
+                    <div class="metric-icon"><i class="fa-solid fa-circle-check"></i></div>
+                </div>
+            </div>
+
+            <!-- Controls (Filter and Export) -->
+            <div class="controls-panel">
+                <div class="filter-group">
+                    <label class="form-label" style="margin-bottom: 0; font-size: 13px;" for="filter-type">문의 유형 필터</label>
+                    <select class="form-control" id="filter-type" style="padding: 8px 14px; width: 180px; font-size: 13px;">
+                        <option value="all">전체보기</option>
+                        <option value="b2c-couple">신랑 신부 (B2C)</option>
+                        <option value="b2b-venue">웨딩홀/베뉴 (B2B)</option>
+                        <option value="b2b-planner">플래너/디렉터 (B2B)</option>
+                    </select>
+                </div>
+                <button class="btn btn-outline" id="btn-export" style="padding: 10px 20px; font-size: 13px;"><i class="fa-solid fa-file-csv" style="margin-right: 8px;"></i>엑셀 CSV 다운로드</button>
+            </div>
+
+            <!-- Data Table Container -->
+            <div class="table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 14%">접수 일시</th>
+                            <th style="width: 12%">문의 구분</th>
+                            <th style="width: 12%">이름/담당자</th>
+                            <th style="width: 14%">연락처</th>
+                            <th style="width: 18%">예식 정보 (베뉴)</th>
+                            <th style="width: 18%">문의 사항</th>
+                            <th style="width: 12%">진행 상태</th>
+                            <th style="width: 5%; text-align: center;">삭제</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inquiries-tbody">
+                        <!-- Dynamic content goes here -->
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="admin-script.js"></script>
+    <script>
+        // Particle background logic for admin console
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('canvas-bg');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                let particles = [];
+                function resize() {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                }
+                resize();
+                window.addEventListener('resize', resize);
+
+                class AmbientSparkle {
+                    constructor() {
+                        this.x = Math.random() * canvas.width;
+                        this.y = Math.random() * canvas.height;
+                        this.size = Math.random() * 1.5 + 0.5;
+                        this.speedX = Math.random() * 0.4 - 0.2;
+                        this.speedY = Math.random() * -0.4 - 0.1;
+                        this.alpha = Math.random() * 0.8 + 0.2;
+                        this.decay = Math.random() * 0.005 + 0.002;
+                    }
+                    update() {
+                        this.x += this.speedX;
+                        this.y += this.speedY;
+                        this.alpha -= this.decay;
+                        if (this.alpha <= 0 || this.y < -10) {
+                            this.y = canvas.height + 10;
+                            this.x = Math.random() * canvas.width;
+                            this.alpha = 1;
+                        }
+                    }
+                    draw() {
+                        ctx.save();
+                        ctx.globalAlpha = this.alpha;
+                        ctx.beginPath();
+                        ctx.fillStyle = `rgba(155, 93, 229, ${this.alpha})`;
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.restore();
+                    }
+                }
+
+                for (let i = 0; i < 40; i++) {
+                    particles.push(new AmbientSparkle());
+                }
+
+                function loop() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.fillStyle = 'radial-gradient(circle at 50% 50%, rgba(20, 15, 38, 0.6) 0%, #0a0712 100%)';
+                    ctx.fillRect(0,0,canvas.width,canvas.height);
+                    particles.forEach(p => {
+                        p.update();
+                        p.draw();
+                    });
+                    requestAnimationFrame(loop);
+                }
+                loop();
+            }
+        });
+    </script>
+</body>
+</html>
