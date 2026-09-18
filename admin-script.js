@@ -44,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (result.success) {
                 localStorage.setItem('adminToken', result.token);
-                // Set cookie for admin session to exclude views counting in the backend
                 document.cookie = "isAdmin=true; path=/; max-age=86400";
                 loginError.style.display = 'none';
                 adminPasswordInput.value = '';
@@ -61,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btnLogout.addEventListener('click', () => {
         localStorage.removeItem('adminToken');
-        // Clear cookie for admin session
         document.cookie = "isAdmin=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC";
         hideDashboard();
     });
@@ -100,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (result.success) {
                 allInquiries = result.data;
                 pageViewsCount = result.pageViews || 120;
-                renderInquiries(allInquiries);
+                filterAndRender();
                 updateMetrics(allInquiries);
             }
         } catch (err) {
@@ -114,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (data.length === 0) {
             inquiriesTbody.innerHTML = `
                 <tr>
-                    <td colspan="8" class="no-data">상담 및 문의 데이터가 없습니다.</td>
+                    <td colspan="8" class="no-data"><i class="fa-solid fa-inbox" style="margin-right: 8px; color: #94a3b8;"></i> 접수된 상담 및 문의 데이터가 없습니다.</td>
                 </tr>
             `;
             return;
@@ -124,13 +122,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const row = document.createElement('tr');
             
             // Format Type Badge
-            let typeBadge = '';
-            if (item.type === 'b2c-couple') {
-                typeBadge = `<span class="badge-type badge-b2c">B2C 신랑신부</span>`;
-            } else if (item.type === 'b2b-venue') {
-                typeBadge = `<span class="badge-type badge-b2b-venue">B2B 베뉴</span>`;
-            } else if (item.type === 'b2b-planner') {
-                typeBadge = `<span class="badge-type badge-b2b-planner">B2B 플래너</span>`;
+            let typeBadge = `<span style="background: #f1f5f9; color: #334155; font-weight: 700; padding: 4px 10px; border-radius: 20px; font-size: 12px; border: 1px solid #cbd5e1;">${escapeHtml(item.type)}</span>`;
+            if (item.type === 'b2c-couple' || item.type.includes('B2C')) {
+                typeBadge = `<span style="background: #eff6ff; color: #1d4ed8; font-weight: 700; padding: 4px 10px; border-radius: 20px; font-size: 12px; border: 1px solid #bfdbfe;"><i class="fa-solid fa-heart"></i> B2C 본식연출</span>`;
+            } else if (item.type === 'b2b-venue' || item.type.includes('베뉴')) {
+                typeBadge = `<span style="background: #fef3c7; color: #b45309; font-weight: 700; padding: 4px 10px; border-radius: 20px; font-size: 12px; border: 1px solid #fde68a;"><i class="fa-solid fa-building-columns"></i> B2B 베뉴</span>`;
+            } else if (item.type === 'b2b-planner' || item.type.includes('플래너')) {
+                typeBadge = `<span style="background: #f3e8ff; color: #7c3aed; font-weight: 700; padding: 4px 10px; border-radius: 20px; font-size: 12px; border: 1px solid #ddd6fe;"><i class="fa-solid fa-user-tie"></i> B2B 플래너</span>`;
             }
 
             // Format Date
@@ -147,21 +145,21 @@ document.addEventListener('DOMContentLoaded', () => {
             if (item.status === '계약완료') statusClass = 'status-completed';
 
             row.innerHTML = `
-                <td>${dateStr}</td>
+                <td style="font-weight: 600; color: #64748b;">${dateStr}</td>
                 <td>${typeBadge}</td>
-                <td style="font-weight: 600;">${escapeHtml(item.name)}</td>
-                <td><a href="tel:${item.phone}" style="color: var(--gold); text-decoration: none;">${escapeHtml(item.phone)}</a></td>
-                <td>${escapeHtml(item.details)}</td>
-                <td style="font-size: 13px; color: var(--text-muted); max-width: 250px; overflow-wrap: break-word;">${escapeHtml(item.message)}</td>
+                <td><span class="user-name">${escapeHtml(item.name)}</span></td>
+                <td><a href="tel:${item.phone}" class="phone-link"><i class="fa-solid fa-phone"></i> ${escapeHtml(item.phone)}</a></td>
+                <td style="font-weight: 600; color: #334155;">${escapeHtml(item.details)}</td>
+                <td style="font-size: 13px; color: #475569; max-width: 280px; line-height: 1.5; overflow-wrap: break-word;">${escapeHtml(item.message)}</td>
                 <td>
                     <select class="select-status ${statusClass}" data-id="${item.id}">
-                        <option value="대기중" ${item.status === '대기중' ? 'selected' : ''}>대기중</option>
-                        <option value="연락완료" ${item.status === '연락완료' ? 'selected' : ''}>연락완료</option>
-                        <option value="계약완료" ${item.status === '계약완료' ? 'selected' : ''}>계약완료</option>
+                        <option value="대기중" ${item.status === '대기중' ? 'selected' : ''}>⏳ 대기중</option>
+                        <option value="연락완료" ${item.status === '연락완료' ? 'selected' : ''}>📞 연락완료</option>
+                        <option value="계약완료" ${item.status === '계약완료' ? 'selected' : ''}>🎉 계약완료</option>
                     </select>
                 </td>
                 <td style="text-align: center;">
-                    <button class="btn-action-delete" data-id="${item.id}"><i class="fa-solid fa-trash"></i></button>
+                    <button class="btn-action-delete" data-id="${item.id}" title="삭제"><i class="fa-solid fa-trash-can"></i></button>
                 </td>
             `;
 
@@ -182,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
             button.addEventListener('click', async (e) => {
                 const buttonElement = e.target.closest('.btn-action-delete');
                 const id = buttonElement.getAttribute('data-id');
-                if (confirm('이 문의를 삭제하시겠습니까? 데이터가 전면 삭제됩니다.')) {
+                if (confirm('이 문의 건을 정말 삭제하시겠습니까?')) {
                     await deleteInquiry(id);
                 }
             });
@@ -205,13 +203,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const result = await response.json();
             if (result.success) {
-                // Update local array element
                 const index = allInquiries.findIndex(item => item.id === id);
                 if (index !== -1) {
                     allInquiries[index].status = status;
                 }
-                
-                // Re-render and update statistics without full reload
                 filterAndRender();
                 updateMetrics(allInquiries);
             }
@@ -253,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let filtered = allInquiries;
 
         if (typeValue !== 'all') {
-            filtered = allInquiries.filter(item => item.type === typeValue);
+            filtered = allInquiries.filter(item => item.type === typeValue || item.type.includes(typeValue));
         }
 
         renderInquiries(filtered);
@@ -282,36 +277,31 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // CSV Header with BOM for Korean Excel compatibility
         let csvContent = '\uFEFF'; 
         csvContent += '접수일시,구분,이름/담당자,연락처,예식일시및베뉴,상세문의,상태\n';
 
         allInquiries.forEach(item => {
-            const typeStr = item.type === 'b2c-couple' ? 'B2C 신랑신부' : (item.type === 'b2b-venue' ? 'B2B 베뉴' : 'B2B 플래너');
             const dateStr = new Date(item.createdAt).toLocaleString('ko-KR');
-            
-            // Escape double quotes and commas
-            const name = `"${item.name.replace(/"/g, '""')}"`;
-            const phone = `"${item.phone.replace(/"/g, '""')}"`;
-            const details = `"${item.details.replace(/"/g, '""')}"`;
-            const message = `"${item.message.replace(/"/g, '""')}"`;
+            const name = `"${(item.name || '').replace(/"/g, '""')}"`;
+            const phone = `"${(item.phone || '').replace(/"/g, '""')}"`;
+            const details = `"${(item.details || '').replace(/"/g, '""')}"`;
+            const message = `"${(item.message || '').replace(/"/g, '""')}"`;
+            const typeStr = `"${(item.type || '').replace(/"/g, '""')}"`;
 
             csvContent += `${dateStr},${typeStr},${name},${phone},${details},${message},${item.status}\n`;
         });
 
-        // Create Blob and trigger download
         const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.setAttribute('href', url);
-        link.setAttribute('download', `aethera_inquiries_export_${new Date().toISOString().slice(0,10)}.csv`);
+        link.setAttribute('download', `aethera_inquiries_${new Date().toISOString().slice(0,10)}.csv`);
         link.style.visibility = 'hidden';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
     });
 
-    // Helper to escape HTML tags for basic security
     function escapeHtml(text) {
         if (!text) return '';
         const map = {

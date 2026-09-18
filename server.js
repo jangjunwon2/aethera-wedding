@@ -201,6 +201,75 @@ async function incrementPageViews() {
     return analytics.pageViews;
 }
 
+// -------------------------------------------------------------------------
+// Instant Multi-Channel Notification Module (Webhook, Telegram, Email)
+// -------------------------------------------------------------------------
+async function sendInstantNotification(inquiry) {
+    const webhookUrl = process.env.NOTIFICATION_WEBHOOK_URL;
+    const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
+    const telegramChatId = process.env.TELEGRAM_CHAT_ID;
+    const resendApiKey = process.env.RESEND_API_KEY;
+    const notifyEmail = process.env.NOTIFICATION_EMAIL;
+
+    const messageText = `🔔 [에테라 시네마틱 웨딩] 새로운 상담 문의가 접수되었습니다!\n\n` +
+        `👤 신랑/신부: ${inquiry.name}\n` +
+        `📞 연락처: ${inquiry.phone}\n` +
+        `💒 예식일정/장소: ${inquiry.details}\n` +
+        `💡 문의구분: ${inquiry.type}\n` +
+        `📝 문의내용: ${inquiry.message}\n\n` +
+        `👉 관리자 대시보드: https://aethera-wedding.vercel.app/admin`;
+
+    // 1. Generic Webhook Notification (Slack, Discord, Kakao Webhook)
+    if (webhookUrl) {
+        try {
+            await fetch(webhookUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: messageText, content: messageText })
+            });
+            console.log('✅ Instant Webhook Notification sent!');
+        } catch (e) {
+            console.error('Webhook notification error:', e.message);
+        }
+    }
+
+    // 2. Telegram Bot Free Push Alert
+    if (telegramToken && telegramChatId) {
+        try {
+            await fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: telegramChatId, text: messageText })
+            });
+            console.log('✅ Instant Telegram Push Alert sent!');
+        } catch (e) {
+            console.error('Telegram alert error:', e.message);
+        }
+    }
+
+    // 3. Resend Email Notification
+    if (resendApiKey && notifyEmail) {
+        try {
+            await fetch('https://api.resend.com/emails', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${resendApiKey}`
+                },
+                body: JSON.stringify({
+                    from: 'AETHERA Wedding <onboarding@resend.dev>',
+                    to: [notifyEmail],
+                    subject: `🔔 [에테라 웨딩] ${inquiry.name}님의 새로운 상담 문의가 접수되었습니다.`,
+                    text: messageText
+                })
+            });
+            console.log('✅ Instant Resend Email sent!');
+        } catch (e) {
+            console.error('Resend email error:', e.message);
+        }
+    }
+}
+
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -262,6 +331,8 @@ app.post('/api/inquiry', async (req, res) => {
 
     const saved = await saveNewInquiry(newInquiry);
     if (saved) {
+        // Trigger instant notification in background
+        sendInstantNotification(newInquiry).catch(err => console.error('Notification async error:', err));
         res.json({ success: true });
     } else {
         res.status(500).json({ success: false, message: '데이터 저장 오류가 발생했습니다.' });
