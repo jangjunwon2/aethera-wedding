@@ -99,10 +99,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Gather separated wedding date & venue
+            // Gather separated wedding date, venue, hall, time & duration
             const weddingDate = document.getElementById('wedding-date') ? document.getElementById('wedding-date').value : '';
             const weddingVenue = document.getElementById('wedding-venue') ? document.getElementById('wedding-venue').value : '';
-            const weddingDetails = `${weddingDate} / ${weddingVenue}`;
+            const weddingHall = document.getElementById('wedding-hall') ? document.getElementById('wedding-hall').value : '';
+            const weddingTime = document.getElementById('wedding-time') ? document.getElementById('wedding-time').value : '';
+            const weddingDuration = document.getElementById('wedding-duration') ? document.getElementById('wedding-duration').value : '';
+
+            const weddingDetails = `예식일: ${weddingDate} | 식장: ${weddingVenue} (홀: ${weddingHall}) | 시간: ${weddingTime} (${weddingDuration})`;
 
             // Gather selected interest options
             const checkedBoxes = document.querySelectorAll('input[name="interest"]:checked');
@@ -119,11 +123,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    'inquiry-type': 'b2c-couple',
+                    'inquiry-type': 'B2C 본식 시연 연출',
                     'user-name': document.getElementById('user-name').value,
                     'user-phone': phoneInput.value,
                     'wedding-date': weddingDate,
                     'wedding-venue': weddingVenue,
+                    'wedding-hall': weddingHall,
+                    'wedding-time': weddingTime,
+                    'wedding-duration': weddingDuration,
                     'wedding-details': weddingDetails,
                     'selected-options': selectedOptions,
                     'message': document.getElementById('message').value

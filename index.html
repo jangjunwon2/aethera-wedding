@@ -652,9 +652,27 @@
                                     <input class="form-control" type="text" id="wedding-date" name="wedding-date" placeholder="예: 2026년 10월 24일" required>
                                 </div>
                                 <div>
-                                    <label class="form-label" for="wedding-venue">예정 웨딩 베뉴 (식장명) *</label>
-                                    <input class="form-control" type="text" id="wedding-venue" name="wedding-venue" placeholder="예: 빌라드지디 청담 2층" required>
+                                    <label class="form-label" for="wedding-venue">예정 예식장 (베뉴명) *</label>
+                                    <input class="form-control" type="text" id="wedding-venue" name="wedding-venue" placeholder="예: 빌라드지디 청담" required>
                                 </div>
+                            </div>
+
+                            <!-- Separated Form Fields: Hall & Time -->
+                            <div class="form-group-row">
+                                <div>
+                                    <label class="form-label" for="wedding-hall">예식 홀 이름 *</label>
+                                    <input class="form-control" type="text" id="wedding-hall" name="wedding-hall" placeholder="예: 2층 라포레홀 / 그랜드볼룸" required>
+                                </div>
+                                <div>
+                                    <label class="form-label" for="wedding-time">예식 시작 시간대 *</label>
+                                    <input class="form-control" type="text" id="wedding-time" name="wedding-time" placeholder="예: 오후 12:30 / 14:00" required>
+                                </div>
+                            </div>
+
+                            <!-- Additional Form Field: Duration -->
+                            <div class="form-group">
+                                <label class="form-label" for="wedding-duration">예식 진행 소요시간 *</label>
+                                <input class="form-control" type="text" id="wedding-duration" name="wedding-duration" placeholder="예: 60분 (일반 분리예식) / 90분 / 동시예식 2시간" required>
                             </div>
 
                             <div class="form-group">

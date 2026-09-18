@@ -214,7 +214,7 @@ async function sendInstantNotification(inquiry) {
     const messageText = `🔔 [에테라 시네마틱 웨딩] 새로운 상담 문의가 접수되었습니다!\n\n` +
         `👤 신랑/신부: ${inquiry.name}\n` +
         `📞 연락처: ${inquiry.phone}\n` +
-        `💒 예식일정/장소: ${inquiry.details}\n` +
+        `💒 예식정보: ${inquiry.details}\n` +
         `💡 문의구분: ${inquiry.type}\n` +
         `📝 문의내용: ${inquiry.message}\n\n` +
         `👉 관리자 대시보드: https://aethera-wedding.vercel.app/admin`;
