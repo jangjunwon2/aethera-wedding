@@ -182,9 +182,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.speedX = Math.random() * 1.5 - 0.75;
                 this.speedY = isAmbient ? (Math.random() * -0.5 - 0.2) : (Math.random() * 2 - 1);
                 
-                const hue = isAmbient ? (Math.random() > 0.4 ? 42 : 38) : (Math.random() > 0.3 ? 42 : 35);
+                const hue = 220;
                 const lightness = Math.floor(Math.random() * 20 + 40); // 40%-60% for crisp visibility on light bg
-                this.color = `hsla(${hue}, 85%, ${lightness}%, `;
+                this.color = `hsla(${hue}, 10%, ${lightness}%, `;
                 this.alpha = 0.85;
                 this.decay = Math.random() * 0.012 + 0.006;
             }
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.save();
                 ctx.globalAlpha = this.alpha;
                 ctx.shadowBlur = this.isAmbient ? 3 : 6;
-                ctx.shadowColor = '#c5a059';
+                ctx.shadowColor = '#b6becb';
                 ctx.beginPath();
                 ctx.fillStyle = this.color + this.alpha + ')';
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);

@@ -107,8 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.speedX = Math.random() * 1.5 - 0.75;
                 this.speedY = isAmbient ? (Math.random() * -0.5 - 0.2) : (Math.random() * 2 - 1);
                 
-                const hue = isAmbient ? (Math.random() > 0.6 ? 45 : 270) : (Math.random() > 0.4 ? 45 : 280);
-                const sat = isAmbient ? '40%' : '90%';
+                const hue = 220;
+                const sat = '10%';
                 const light = isAmbient ? '60%' : '75%';
                 this.color = `hsla(${hue}, ${sat}, ${light}, `;
                 this.alpha = 1;
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.save();
                 ctx.globalAlpha = this.alpha;
                 ctx.shadowBlur = this.isAmbient ? 4 : 10;
-                ctx.shadowColor = this.color.includes('45') ? '#d4af37' : '#9b5de5';
+                ctx.shadowColor = '#b6becb';
                 
                 ctx.beginPath();
                 ctx.fillStyle = this.color + this.alpha + ')';
