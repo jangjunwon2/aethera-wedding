@@ -1077,6 +1077,7 @@ textarea.form-control {
 }
 
 .float-btn {
+    position: relative;
     width: 56px;
     height: 56px;
     border-radius: 50%;
@@ -1088,6 +1089,23 @@ textarea.form-control {
     font-size: 24px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     transition: var(--transition-smooth);
+}
+
+.float-tooltip {
+    position: absolute;
+    right: 68px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #0f172a;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.25);
+    pointer-events: none;
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .float-kakao {
