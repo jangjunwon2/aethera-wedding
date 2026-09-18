@@ -1,15 +1,22 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
+  "functions": {
+    "server.js": {
+      "includeFiles": "admin.html,b2b.html,index.html"
     }
-  ],
-  "routes": [
+  },
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "dest": "server.js"
+      "source": "/api/(.*)",
+      "destination": "/server.js"
+    },
+    {
+      "source": "/admin",
+      "destination": "/server.js"
+    },
+    {
+      "source": "/b2b",
+      "destination": "/server.js"
     }
   ]
 }
