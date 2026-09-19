@@ -213,7 +213,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         <option value="계약완료" ${item.status === '계약완료' ? 'selected' : ''}>🎉 계약완료</option>
                     </select>
                 </td>
-                <td style="text-align: center;">
+                <td style="text-align: center; display: flex; gap: 6px; justify-content: center;">
+                    <button class="btn-action-view" data-id="${item.id}" title="상세보기" style="background: #f1f5f9; border: 1px solid #cbd5e1; color: #334155; padding: 6px 10px; border-radius: 6px; cursor: pointer;"><i class="fa-solid fa-eye"></i></button>
                     <button class="btn-action-delete" data-id="${item.id}" title="삭제"><i class="fa-solid fa-trash-can"></i></button>
                 </td>
             `;
@@ -227,6 +228,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 const id = e.target.getAttribute('data-id');
                 const newStatus = e.target.value;
                 await updateStatus(id, newStatus);
+            });
+        });
+
+        // Add Event Listeners for Detail View Buttons
+        document.querySelectorAll('.btn-action-view').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const buttonElement = e.target.closest('.btn-action-view');
+                const id = buttonElement.getAttribute('data-id');
+                const item = allInquiries.find(inq => inq.id === id);
+                if (item) openDetailModal(item);
             });
         });
 
@@ -292,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // -------------------------------------------------------------------------
-    // Filters, Auto-Refresh & Metrics Calculations
+    // Filters, Search, Auto-Refresh & Metrics Calculations
     // -------------------------------------------------------------------------
     const btnRefresh = document.getElementById('btn-refresh');
     const refreshIcon = document.getElementById('refresh-icon');
@@ -316,23 +327,102 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 10000);
 
-    filterType.addEventListener('change', () => {
-        filterAndRender();
-    });
+    const filterStatus = document.getElementById('filter-status');
+    const searchInput = document.getElementById('search-input');
+
+    if (filterType) filterType.addEventListener('change', filterAndRender);
+    if (filterStatus) filterStatus.addEventListener('change', filterAndRender);
+    if (searchInput) searchInput.addEventListener('input', filterAndRender);
 
     function filterAndRender() {
-        const typeValue = filterType.value;
+        const typeValue = filterType ? filterType.value : 'all';
+        const statusValue = filterStatus ? filterStatus.value : 'all';
+        const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
+
         let filtered = allInquiries;
 
+        // 1. Filter by Type
         if (typeValue === 'b2c-couple') {
-            filtered = allInquiries.filter(item => item.type.includes('B2C') || item.type.includes('b2c') || item.type.includes('본식'));
+            filtered = filtered.filter(item => item.type.includes('B2C') || item.type.includes('b2c') || item.type.includes('본식'));
         } else if (typeValue === 'b2b-venue') {
-            filtered = allInquiries.filter(item => item.type.includes('베뉴') || item.type.includes('b2b-venue'));
+            filtered = filtered.filter(item => item.type.includes('베뉴') || item.type.includes('b2b-venue'));
         } else if (typeValue === 'b2b-planner') {
-            filtered = allInquiries.filter(item => item.type.includes('플래너') || item.type.includes('b2b-planner'));
+            filtered = filtered.filter(item => item.type.includes('플래너') || item.type.includes('b2b-planner'));
+        }
+
+        // 2. Filter by Status
+        if (statusValue !== 'all') {
+            filtered = filtered.filter(item => item.status === statusValue);
+        }
+
+        // 3. Search by Text
+        if (query) {
+            filtered = filtered.filter(item => 
+                (item.name && item.name.toLowerCase().includes(query)) ||
+                (item.phone && item.phone.toLowerCase().includes(query)) ||
+                (item.details && item.details.toLowerCase().includes(query)) ||
+                (item.message && item.message.toLowerCase().includes(query))
+            );
         }
 
         renderInquiries(filtered);
+    }
+
+    // Detail View Modal Handler
+    const detailModal = document.getElementById('detail-modal');
+    const btnCloseModal = document.getElementById('btn-close-modal');
+    const modalBodyContent = document.getElementById('modal-body-content');
+    const modalActions = document.getElementById('modal-actions');
+
+    if (btnCloseModal && detailModal) {
+        btnCloseModal.addEventListener('click', () => {
+            detailModal.style.display = 'none';
+        });
+        detailModal.addEventListener('click', (e) => {
+            if (e.target === detailModal) detailModal.style.display = 'none';
+        });
+    }
+
+    function openDetailModal(item) {
+        if (!detailModal || !modalBodyContent) return;
+
+        const dateStr = new Date(item.createdAt).toLocaleString('ko-KR');
+
+        modalBodyContent.innerHTML = `
+            <div style="margin-bottom: 16px; padding: 12px; background: #f8fafc; border-radius: 10px; border: 1px solid #e2e8f0;">
+                <p><strong>📋 문의 구분:</strong> ${escapeHtml(item.type)}</p>
+                <p><strong>🕒 접수 일시:</strong> ${dateStr}</p>
+                <p><strong>📌 상담 상태:</strong> <span style="font-weight:700; color:#2563eb;">${escapeHtml(item.status)}</span></p>
+            </div>
+            <div style="margin-bottom: 14px;">
+                <p><strong>👤 성함 / 담당자:</strong> <span style="font-weight:700;">${escapeHtml(item.name)}</span></p>
+                <p><strong>📞 연락처:</strong> <a href="tel:${item.phone}" style="color: #2563eb; font-weight:700;">${escapeHtml(item.phone)}</a></p>
+            </div>
+            <div style="margin-bottom: 14px;">
+                <p><strong>💒 예식일정 및 베뉴 정보:</strong></p>
+                <div style="background: #f1f5f9; padding: 10px 14px; border-radius: 8px; margin-top: 4px; font-weight:600;">${escapeHtml(item.details)}</div>
+            </div>
+            <div>
+                <p><strong>📝 상세 문의 및 선택 옵션:</strong></p>
+                <div style="background: #f1f5f9; padding: 12px 14px; border-radius: 8px; margin-top: 4px; white-space: pre-wrap; line-height: 1.6;">${escapeHtml(item.message)}</div>
+            </div>
+        `;
+
+        modalActions.innerHTML = `
+            <a href="tel:${item.phone}" class="btn-login-submit" style="text-decoration:none; padding: 10px 18px; font-size:13px; background: #059669; display:inline-flex; align-items:center; gap:6px;">
+                <i class="fa-solid fa-phone"></i> 바로 전화 걸기
+            </a>
+            <a href="http://pf.kakao.com/_QXzaX/chat" target="_blank" class="btn-login-submit" style="text-decoration:none; padding: 10px 18px; font-size:13px; background: #fee500; color:#000; font-weight:800; display:inline-flex; align-items:center; gap:6px;">
+                <i class="fa-comment fa-solid"></i> 카카오톡 채팅
+            </a>
+            <button id="btn-close-modal-inner" class="btn-logout" style="padding: 10px 16px; font-size:13px;">닫기</button>
+        `;
+
+        detailModal.style.display = 'flex';
+
+        document.getElementById('btn-close-modal-inner')?.addEventListener('click', () => {
+            detailModal.style.display = 'none';
+        });
     }
 
     function updateMetrics(data) {

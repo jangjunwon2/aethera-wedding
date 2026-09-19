@@ -579,14 +579,31 @@
 
         <!-- Controls & Filter Panel -->
         <div class="controls-panel">
-            <div class="filter-group">
-                <span class="filter-label"><i class="fa-solid fa-filter"></i> 문의 구분:</span>
-                <select id="filter-type" class="select-filter">
-                    <option value="all">전체 문의 보기</option>
-                    <option value="b2c-couple">B2C 신랑신부 (본식 연출)</option>
-                    <option value="b2b-venue">B2B 베뉴 제휴</option>
-                    <option value="b2b-planner">B2B 플래너 제휴</option>
-                </select>
+            <div class="filter-group" style="flex-wrap: wrap; gap: 12px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="filter-label"><i class="fa-solid fa-filter"></i> 문의 구분:</span>
+                    <select id="filter-type" class="select-filter">
+                        <option value="all">전체 문의 보기</option>
+                        <option value="b2c-couple">B2C 신랑신부 (본식 연출)</option>
+                        <option value="b2b-venue">B2B 베뉴 제휴</option>
+                        <option value="b2b-planner">B2B 플래너 제휴</option>
+                    </select>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="filter-label"><i class="fa-solid fa-list-check"></i> 처리 상태:</span>
+                    <select id="filter-status" class="select-filter">
+                        <option value="all">전체 상태</option>
+                        <option value="대기중">⏳ 대기중</option>
+                        <option value="연락완료">📞 연락완료</option>
+                        <option value="계약완료">🎉 계약완료</option>
+                    </select>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="filter-label"><i class="fa-solid fa-magnifying-glass"></i> 검색:</span>
+                    <input type="text" id="search-input" class="select-filter" style="width: 170px;" placeholder="성함/연락처/식장명">
+                </div>
             </div>
 
             <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
@@ -618,6 +635,24 @@
                     <!-- Dynamic rendering by admin-script.js -->
                 </tbody>
             </table>
+        </div>
+    </div>
+
+    <!-- Detail View Modal Overlay -->
+    <div class="login-overlay" id="detail-modal" style="display: none;">
+        <div class="login-box" style="max-width: 580px; text-align: left; padding: 36px 32px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1.5px solid var(--admin-border); padding-bottom: 14px;">
+                <h3 style="font-size: 18px; font-weight: 800; color: var(--admin-text-main);" id="modal-title">상담 문의 상세 내역</h3>
+                <button id="btn-close-modal" style="background: none; border: none; font-size: 22px; cursor: pointer; color: #64748b;"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <div id="modal-body-content" style="line-height: 1.8; font-size: 14px; color: var(--admin-text-main);">
+                <!-- Dynamic content -->
+            </div>
+
+            <div style="margin-top: 24px; display: flex; gap: 10px; justify-content: flex-end; border-top: 1.5px solid var(--admin-border); padding-top: 16px;" id="modal-actions">
+                <!-- Action buttons -->
+            </div>
         </div>
     </div>
 
