@@ -68,12 +68,67 @@ document.addEventListener('DOMContentLoaded', () => {
         loginOverlay.style.display = 'none';
         adminDashboard.style.display = 'block';
         loadInquiries();
+        initBannerControls();
     }
 
     function hideDashboard() {
         loginOverlay.style.display = 'flex';
         adminDashboard.style.display = 'none';
         inquiriesTbody.innerHTML = '';
+    }
+
+    // -------------------------------------------------------------------------
+    // Urgency Banner Admin Controller
+    // -------------------------------------------------------------------------
+    function initBannerControls() {
+        const bannerToggle = document.getElementById('banner-toggle-switch');
+        const bannerStatusText = document.getElementById('banner-status-text');
+        const bannerTextInput = document.getElementById('banner-text-input');
+        const btnSaveBanner = document.getElementById('btn-save-banner');
+
+        if (!bannerToggle || !bannerTextInput || !btnSaveBanner) return;
+
+        const savedEnabled = localStorage.getItem('urgencyBannerEnabled');
+        const savedText = localStorage.getItem('urgencyBannerText');
+
+        if (savedEnabled === 'false') {
+            bannerToggle.checked = false;
+            if (bannerStatusText) {
+                bannerStatusText.textContent = 'OFF (숨김)';
+                bannerStatusText.style.color = '#64748b';
+            }
+        } else {
+            bannerToggle.checked = true;
+            if (bannerStatusText) {
+                bannerStatusText.textContent = 'ON (노출 중)';
+                bannerStatusText.style.color = '#10b981';
+            }
+        }
+
+        if (savedText) {
+            bannerTextInput.value = savedText;
+        }
+
+        bannerToggle.addEventListener('change', () => {
+            if (bannerToggle.checked) {
+                if (bannerStatusText) {
+                    bannerStatusText.textContent = 'ON (노출 중)';
+                    bannerStatusText.style.color = '#10b981';
+                }
+            } else {
+                if (bannerStatusText) {
+                    bannerStatusText.textContent = 'OFF (숨김)';
+                    bannerStatusText.style.color = '#64748b';
+                }
+            }
+        });
+
+        btnSaveBanner.addEventListener('click', () => {
+            localStorage.setItem('urgencyBannerEnabled', bannerToggle.checked ? 'true' : 'false');
+            localStorage.setItem('urgencyBannerText', bannerTextInput.value.trim());
+
+            alert('✅ 조기 마감 안내 바 설정이 성공적으로 저장되었습니다!\n웹사이트 메인화면에 즉시 반영됩니다.');
+        });
     }
 
     // -------------------------------------------------------------------------

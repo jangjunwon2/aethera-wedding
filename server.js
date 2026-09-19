@@ -314,8 +314,8 @@ app.get('/b2b', (req, res) => {
 app.post('/api/inquiry', async (req, res) => {
     const { 'inquiry-type': type, 'user-name': name, 'user-phone': phone, 'wedding-details': details, message } = req.body;
 
-    if (!type || !name || !phone || !details || !message) {
-        return res.status(400).json({ success: false, message: '모든 필수 항목을 입력해 주세요.' });
+    if (!type || !name || !phone) {
+        return res.status(400).json({ success: false, message: '성함과 연락처는 필수 입력 항목입니다.' });
     }
 
     const newInquiry = {
@@ -323,8 +323,8 @@ app.post('/api/inquiry', async (req, res) => {
         type,
         name,
         phone,
-        details,
-        message,
+        details: details || '상세 예식정보 미입력',
+        message: message || '상세 문의사항 없음',
         status: '대기중',
         createdAt: new Date().toISOString()
     };

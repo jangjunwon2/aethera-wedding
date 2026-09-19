@@ -80,7 +80,42 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // -------------------------------------------------------------------------
-    // 4. Form Submission & Consultation Request (Separated Date & Venue)
+    // 4. Hybrid Date Picker & Urgency Banner Controller
+    // -------------------------------------------------------------------------
+    const weddingDateInput = document.getElementById('wedding-date');
+    const weddingDatePicker = document.getElementById('wedding-date-picker');
+
+    if (weddingDateInput && weddingDatePicker) {
+        weddingDatePicker.addEventListener('change', (e) => {
+            const val = e.target.value;
+            if (val) {
+                const parts = val.split('-');
+                if (parts.length === 3) {
+                    weddingDateInput.value = `${parts[0]}년 ${parseInt(parts[1], 10)}월 ${parseInt(parts[2], 10)}일`;
+                }
+            }
+        });
+    }
+
+    const urgencyBanner = document.getElementById('urgency-banner');
+    const urgencyText = document.getElementById('urgency-text');
+
+    if (urgencyBanner) {
+        const bannerEnabled = localStorage.getItem('urgencyBannerEnabled');
+        const bannerCustomText = localStorage.getItem('urgencyBannerText');
+
+        if (bannerEnabled === 'false') {
+            urgencyBanner.style.display = 'none';
+        } else {
+            urgencyBanner.style.display = 'block';
+            if (bannerCustomText && urgencyText) {
+                urgencyText.textContent = bannerCustomText;
+            }
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // 5. Form Submission & Consultation Request (Required: Name, Phone, Date)
     // -------------------------------------------------------------------------
     const bookingForm = document.getElementById('booking-form');
     const formSuccess = document.getElementById('form-success');
@@ -99,14 +134,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Gather separated wedding date, venue, hall, time & duration
-            const weddingDate = document.getElementById('wedding-date') ? document.getElementById('wedding-date').value : '';
-            const weddingVenue = document.getElementById('wedding-venue') ? document.getElementById('wedding-venue').value : '';
-            const weddingHall = document.getElementById('wedding-hall') ? document.getElementById('wedding-hall').value : '';
-            const weddingTime = document.getElementById('wedding-time') ? document.getElementById('wedding-time').value : '';
-            const weddingDuration = document.getElementById('wedding-duration') ? document.getElementById('wedding-duration').value : '';
+            // Gather form fields (Date, Venue, Hall, Time & Duration)
+            const weddingDate = document.getElementById('wedding-date') ? document.getElementById('wedding-date').value.trim() : '';
+            const weddingVenue = document.getElementById('wedding-venue') ? document.getElementById('wedding-venue').value.trim() : '';
+            const weddingHall = document.getElementById('wedding-hall') ? document.getElementById('wedding-hall').value.trim() : '';
+            const weddingTime = document.getElementById('wedding-time') ? document.getElementById('wedding-time').value.trim() : '';
+            const weddingDuration = document.getElementById('wedding-duration') ? document.getElementById('wedding-duration').value.trim() : '';
 
-            const weddingDetails = `예식일: ${weddingDate} | 식장: ${weddingVenue} (홀: ${weddingHall}) | 시간: ${weddingTime} (${weddingDuration})`;
+            let detailsArr = [];
+            if (weddingDate) detailsArr.push(`예식일: ${weddingDate}`);
+            if (weddingVenue) detailsArr.push(`식장: ${weddingVenue}${weddingHall ? ' (' + weddingHall + ')' : ''}`);
+            if (weddingTime) detailsArr.push(`시간: ${weddingTime}`);
+            if (weddingDuration) detailsArr.push(`소요시간: ${weddingDuration}`);
+
+            const weddingDetails = detailsArr.length > 0 ? detailsArr.join(' | ') : '상세 예식정보 미입력';
 
             // Gather selected interest options
             const checkedBoxes = document.querySelectorAll('input[name="interest"]:checked');
@@ -133,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     'wedding-duration': weddingDuration,
                     'wedding-details': weddingDetails,
                     'selected-options': selectedOptions,
-                    'message': document.getElementById('message').value
+                    'message': document.getElementById('message') ? document.getElementById('message').value : ''
                 })
             })
             .then(res => res.json())
