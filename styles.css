@@ -1465,53 +1465,87 @@ footer p {
     color: var(--text-muted);
 }
 
-/* Urgency Banner Bar */
-.urgency-banner {
-    background: linear-gradient(135deg, #2c2336 0%, #4a3b32 100%);
+/* Top Sticky Urgency Bar */
+.top-sticky-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background: linear-gradient(90deg, #1e1926 0%, #3a2c24 50%, #1e1926 100%);
+    border-bottom: 1px solid rgba(196, 164, 156, 0.35);
     color: #ffffff;
-    border-radius: 16px;
-    padding: 16px 24px;
-    margin-bottom: 32px;
-    box-shadow: 0 10px 25px rgba(44, 35, 54, 0.15);
-    border: 1px solid rgba(196, 164, 156, 0.4);
-    transition: var(--transition-smooth);
-}
-
-.urgency-banner-inner {
+    z-index: 1002;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transition: var(--transition-smooth);
 }
 
-.urgency-fire {
-    font-size: 20px;
-}
-
-.urgency-text-content {
-    font-size: 14.5px;
-    font-weight: 700;
-    color: #ffffff;
-    line-height: 1.5;
-    flex: 1;
-}
-
-.btn-urgency {
-    background: #ffffff;
-    color: #2c2336;
-    padding: 8px 18px;
-    border-radius: 20px;
+.top-sticky-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
     font-size: 13px;
+    font-weight: 700;
+    padding: 0 16px;
+    max-width: 1240px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.top-sticky-inner #urgency-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.top-sticky-btn {
+    background: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+    padding: 3px 12px;
+    border-radius: 12px;
+    font-size: 11.5px;
     font-weight: 800;
     text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.3);
     white-space: nowrap;
     transition: var(--transition-smooth);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.btn-urgency:hover {
-    background: #faf5ef;
-    color: #9d7b68;
-    transform: translateY(-2px);
+.top-sticky-btn:hover {
+    background: #ffffff;
+    color: #1e1926;
+}
+
+/* Adjust header position when top sticky bar is active */
+body.has-top-banner header {
+    top: 40px;
+}
+
+body.has-top-banner main {
+    padding-top: 40px;
+}
+
+@media (max-width: 768px) {
+    .top-sticky-banner {
+        height: 36px;
+    }
+    .top-sticky-inner {
+        font-size: 11px;
+        gap: 6px;
+    }
+    .top-sticky-btn {
+        font-size: 10px;
+        padding: 2px 8px;
+    }
+    body.has-top-banner header {
+        top: 36px;
+    }
+    body.has-top-banner .nav-menu {
+        top: 116px;
+        height: calc(100vh - 116px);
+    }
 }

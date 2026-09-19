@@ -106,8 +106,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (bannerEnabled === 'false') {
             urgencyBanner.style.display = 'none';
+            document.body.classList.remove('has-top-banner');
         } else {
-            urgencyBanner.style.display = 'block';
+            urgencyBanner.style.display = 'flex';
+            document.body.classList.add('has-top-banner');
             if (bannerCustomText && urgencyText) {
                 urgencyText.textContent = bannerCustomText;
             }
