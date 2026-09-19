@@ -292,8 +292,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // -------------------------------------------------------------------------
-    // Filters & Metrics Calculations
+    // Filters, Auto-Refresh & Metrics Calculations
     // -------------------------------------------------------------------------
+    const btnRefresh = document.getElementById('btn-refresh');
+    const refreshIcon = document.getElementById('refresh-icon');
+
+    if (btnRefresh) {
+        btnRefresh.addEventListener('click', () => {
+            if (refreshIcon) refreshIcon.classList.add('fa-spin');
+            loadInquiries().then(() => {
+                setTimeout(() => {
+                    if (refreshIcon) refreshIcon.classList.remove('fa-spin');
+                }, 500);
+            });
+        });
+    }
+
+    // Auto Refresh every 10 seconds silently
+    setInterval(() => {
+        const token = localStorage.getItem('adminToken');
+        if (token && adminDashboard.style.display !== 'none') {
+            loadInquiries();
+        }
+    }, 10000);
+
     filterType.addEventListener('change', () => {
         filterAndRender();
     });
@@ -302,8 +324,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const typeValue = filterType.value;
         let filtered = allInquiries;
 
-        if (typeValue !== 'all') {
-            filtered = allInquiries.filter(item => item.type === typeValue || item.type.includes(typeValue));
+        if (typeValue === 'b2c-couple') {
+            filtered = allInquiries.filter(item => item.type.includes('B2C') || item.type.includes('b2c') || item.type.includes('본식'));
+        } else if (typeValue === 'b2b-venue') {
+            filtered = allInquiries.filter(item => item.type.includes('베뉴') || item.type.includes('b2b-venue'));
+        } else if (typeValue === 'b2b-planner') {
+            filtered = allInquiries.filter(item => item.type.includes('플래너') || item.type.includes('b2b-planner'));
         }
 
         renderInquiries(filtered);
